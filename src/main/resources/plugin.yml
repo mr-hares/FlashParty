@@ -1,0 +1,21 @@
+name: FlashParty
+version: '1.1.0'
+main: ctx.mr_hares.flashParty.FlashParty
+api-version: '1.21'
+authors: [ mr_hares ]
+softdepend: [PlaceholderAPI]
+
+commands:
+  party:
+    usage: /party <subcommand> <args>
+  flashparty:
+    aliases: [fp]
+    permission: flashparty.use
+
+permission:
+  flashparty.use:
+    description: Право на использование основной команды
+  flashparty.reload:
+    description: Право на перезагрузку конфигурации
+  flashparty.remove:
+    description: Право на удаление пати со стороны администрации

@@ -1,0 +1,108 @@
+prefix: "&7(&#4dff4dFlashParty&7) &r"
+not-permission: "{prefix}У вас &#4dff4dнедостаточно прав &fдля выполнения данной команды"
+
+# Help
+help:
+  command-list:
+    - ""
+    - "{prefix}Список доступных команд"
+    - "&7/party create [название] - создание новой пати"
+    - "&7/party invite [ник] - пригласить игрока в пати"
+    - "&7/party list - список активных пати"
+    - "&7/party info - информация о пати"
+    - "&7/party leave - покинуть пати"
+    - "&7/party accept - принять приглашение в пати"
+    - "&7/party deny - отклонить приглашения в пати"
+    - "&7/party tag [цвет] [тег] - добавить тег пати"
+    - "&7/party rename [название] - переименовать название пати"
+    - "&7/party kick [ник] - исключить игрока из пати"
+    - "&7/party rank [ник] [ранг] - изменить ранг участника пати"
+
+  use-create: "{prefix}Используйте: &#4dff4d/party create [название]"
+  use-invite: "{prefix}Используйте: &#4dff4d/party invite [ник]"
+  use-tag: "{prefix}Используйте: &#4dff4d/party tag [цвет] [тег]"
+  use-rename: "{prefix}Используйте: &#4dff4d/party rename [название]"
+  use-kick: "{prefix}Используйте: &#4dff4d/party kick [ник]"
+  use-rank: "{prefix}Используйте: &#4dff4d/party rank [ник] [ранг]"
+
+# Main
+in-party: "{prefix}Вы &#4dff4dуже находитесь &fв какой-то пати"
+not-in-party: "{prefix}Вы &#4dff4dне находитесь &fв какой-либо пати"
+player-in-party: "{prefix}Игрок &#4dff4dуже находитесь &fв какой-то пати"
+player-not-in-party: "{prefix}Игрок &#4dff4dне находитесь &fв вашей пати"
+
+not-rank: "{prefix}Ваш ранг &#4dff4dне позволяет использовать &fданную функцию"
+not-found-player: "{prefix}Указанный вами игрок &#4dff4dне найден"
+
+with-myself: "{prefix}Вы &#4dff4dне можете &fвзаимодействовать с самим собой"
+
+max-party: "{prefix}На сервере &#4dff4dдостигнут &fлимит пати"
+max-players: "{prefix}Вы #4dff4dдостигли &fлимита участников в одном пати"
+
+# =================== PARTY COMMAND ===================
+
+# /party create
+name-is-long: "{prefix}Название пати &#4dff4dне должно быть &fбольше &#4dff4d{max_length} &fсимволов"
+name-is-short: "{prefix}Название пати &#4dff4dдолжно быть &fбольше &#4dff4d{min_length} &fсимволов"
+name-is-occupied: "{prefix}Данное название пати &#4dff4dуже занято &fкем-то"
+
+party-create: "{prefix}Вы &#4dff4dуспешно создали &fновое пати {name}"
+
+# /party invite
+is-invite: "{prefix}У данное игрока уже есть активное предложение"
+invited: "{prefix}Вы &#4dff4dотправили &fприглашение на вступление в пати игроку &#4dff4d{player}"
+invite-notify: "{prefix}Игрок &#4dff4d{player} &fприглашает вас &#4dff4dвступить &fв пати {party}\n<on_click:/party 
+accept>[ принять &f]</on_click> <on_click:/party deny>[ отклонить ]</on_click>"
+
+# /party accept/deny
+not-offers: "{prefix}У вас &#4dff4dнет активных &fпредложений"
+accept: "{prefix}Вы &#4dff4dприняли &fпредложение на вступление в пати"
+accept-notify: "{prefix}Игрок &#4dff4d{player} &fпринял ваше предложение"
+deny: "{prefix}Вы &#4dff4dотклонили &fпредложение на вступление в пати"
+deny-notify: "{prefix}Игрок &#4dff4d{player} &fотклонил ваше предложение"
+
+# /party leave
+leave: "{prefix}Вы &#4dff4dпокинули &fпати по собственному желанию"
+leave-owner: "{prefix}Создатель пати &#4dff4dпокинул &fеё по собственному желанию. Пати &#4dff4dудалено"
+
+# /party rename
+rename: "{prefix}Вы &#4dff4dизменили &fназвание своего пати"
+
+# /party tag
+tag-add: "{prefix}Вы &#4dff4dдобавили &fТЕГ пати"
+tag-remove: "{prefix}Вы &#4dff4dудалили &fТЕГ пати"
+
+# /party kick
+kick-player: "{prefix}Вы &#4dff4dисключили &fиз пати игрока &#4dff4d{player}"
+kick-notify: "{prefix}Вас &#4dff4dисключили &fиз пати {party}"
+
+# /party list
+list-empty: "{prefix}Список активных пати пуст"
+list-header: "{prefix}Список активных пати"
+list-item: "&#4dff4d- &r{name} &#4dff4d(Участников: {members}) &#4dff4d| &rТЕГ: {tag}"
+
+# /party rank
+not-found-rank: "{prefix}Указанный вами ранг &#4dff4dне найден"
+already-have-rank: "{prefix}Участник уже находится на данном ранге"
+edit-rank: "{prefix}Вы &#4dff4dизменили &fранг &#4dff4d{player} &fна &#4dff4d{rank}"
+edit-rank-notify: "{prefix}Вам ранг &#4dff4dбыл изменён &fна &#4dff4d{rank}"
+
+# /party info
+party-info:
+  - ""
+  - "&#4dff4d---- &fИнформация о партии {party} &#4dff4d----"
+  - "&fОснователь: &#4dff4d{owner}"
+  - "&fЗаместители: &#4dff4d{deputies}"
+  - "&fТЭГ: {tag}"
+  - "&fУчастники: &#4dff4d{members}"
+  - ""
+
+# =================== FP COMMAND ===================
+
+# /fp reload
+reload: "{prefix}Конфигурация плагина &#4dff4dперезагружена"
+
+# /fp remove
+not-found-party: "{prefix}Указанное пати &#4dff4dне найдено"
+remove: "{prefix}Вы &#4dff4dудалили &fпати {party}"
+remove-notify: "{prefix}Пати {party} было &#4dff4dудалено &fадминистрацией сервера"
