@@ -242,7 +242,21 @@ public class party extends CommandTemplate {
             }
 
             String color = getInstance().getConfig().getString("tag.colors." + args[1], "&r");
+            int max_length = getInstance().getConfig().getInt("tag.max-length");
+            int min_length = getInstance().getConfig().getInt("tag.min-length");
             String tag = args[2];
+
+            if (tag.length() > max_length) {
+                player.sendMessage(color(getLocaleManager().getString("tag-is-long").replace("{max_length}",
+                        String.valueOf(max_length))));
+                return;
+            }
+
+            if (tag.length() < min_length) {
+                player.sendMessage(color(getLocaleManager().getString("tag-is-short").replace("{min_length}",
+                        String.valueOf(min_length))));
+                return;
+            }
 
             getDataBase().editTagParty(member.getParty().getClan_id(), color + tag);
             player.sendMessage(color(getLocaleManager().getString("tag-add")));

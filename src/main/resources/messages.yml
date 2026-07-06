@@ -69,6 +69,8 @@ leave-owner: "{prefix}Создатель пати &#4dff4dпокинул &fеё 
 rename: "{prefix}Вы &#4dff4dизменили &fназвание своего пати"
 
 # /party tag
+tag-is-long: "{prefix}ТЕГ пати &#4dff4dне должно быть &fбольше &#4dff4d{max_length} &fсимволов"
+tag-is-short: "{prefix}ТЕГ пати &#4dff4dдолжно быть &fбольше &#4dff4d{min_length} &fсимволов"
 tag-add: "{prefix}Вы &#4dff4dдобавили &fТЕГ пати"
 tag-remove: "{prefix}Вы &#4dff4dудалили &fТЕГ пати"
 
