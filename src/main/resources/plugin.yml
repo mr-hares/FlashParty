@@ -4,6 +4,8 @@ main: ctx.mr_hares.flashParty.FlashParty
 api-version: '1.21'
 authors: [ mr_hares ]
 softdepend: [PlaceholderAPI]
+folia-supported: true
+bukkit-supported: true
 
 commands:
   party:
