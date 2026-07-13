@@ -5,24 +5,25 @@ import ctx.mr_hares.flashParty.command.party;
 import ctx.mr_hares.flashParty.listener.PlayerChat;
 import ctx.mr_hares.flashParty.utils.DataBase;
 import ctx.mr_hares.flashParty.utils.LocaleManager;
+import ctx.mr_hares.flashParty.utils.MiniManager;
 import ctx.mr_hares.flashParty.utils.PartyPlaceholder;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public final class FlashParty extends JavaPlugin {
     private static FlashParty instance;
     private static DataBase DataBase;
     private static LocaleManager localeManager = null;
+    private static MiniManager miniManager;
 
     @Override
     public void onEnable() {
         instance = this;
+        miniManager = new MiniManager(this);
 
-        sendConsole("&f&r\n  &#4dff4dFlashParty &7by mr_hares&r\n  &fEnable plugin &7| &fVersions " + getDescription().getVersion() + "&r\n&f&r");
+        sendConsole("&f&r\n  <gradient:#96FB57:#70FFC3>FlashParty</gradient> " +
+                "&7by " +
+                "mr_hares&r\n  &fEnable plugin &7| &fVersions " + getDescription().getVersion() + "&r\n&f&r");
 
         saveDefaultConfig();
         DataBase = new DataBase(this);
@@ -43,7 +44,8 @@ public final class FlashParty extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        sendConsole("&f&r\n  &#4dff4dFlashParty &7by mr_hares&r\n  &fDisable plugin &7| &fVersions " + getDescription().getVersion() + "&r\n&f&r");
+        sendConsole("&f&r\n  <gradient:#96FB57:#70FFC3>FlashParty</gradient> &7by mr_hares&r\n  &fDisable plugin &7| &fVersions " + getDescription().getVersion() + "&r\n&f&r");
+        miniManager.disable();
     }
 
     public static FlashParty getInstance() {
@@ -54,33 +56,13 @@ public final class FlashParty extends JavaPlugin {
         return localeManager;
     }
 
+    public static MiniManager getMiniManager() { return miniManager; }
+
     public static DataBase getDataBase() {
         return DataBase;
     }
 
-    public static String color(String message) {
-        if (message == null || message.isEmpty()) {
-            return "";
-        }
-
-        if (getLocaleManager() != null) {
-            message = message.replace("{prefix}", getLocaleManager().getYAML().getString("prefix",
-                    "&7(&#4dff4dFlashParty&7) &r"));
-        }
-
-        Matcher matcher = Pattern.compile("&#([A-Fa-f0-9]{6})").matcher(message);
-        StringBuffer buffer = new StringBuffer();
-
-        while (matcher.find()) {
-            String hex = matcher.group(1);
-            matcher.appendReplacement(buffer, ChatColor.of("#" + hex).toString());
-        }
-        matcher.appendTail(buffer);
-
-        return ChatColor.translateAlternateColorCodes('&', buffer.toString());
-    }
-
     public static void sendConsole(String text) {
-        Bukkit.getServer().getConsoleSender().sendMessage(color(text));
+        Bukkit.getServer().getConsoleSender().sendMessage(miniManager.deserialize(text));
     }
 }

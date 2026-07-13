@@ -30,4 +30,6 @@ ranks:
 # Настройка чата пати
 party-chat:
   symbol: "@" # Символ, который будет использоваться для чата пати
-  format: "&7(&#4dff4dПати&7) &r{rank} {player} &#4dff4d- &r{message}" # Формат сообщения в чате пати
+
+  # Формат сообщения в чате пати
+  format: "&7(<gradient:#96FB57:#70FFC3>Пати</gradient>) &r{rank} {player} <gradient:#96FB57:#70FFC3>- &r{message}"

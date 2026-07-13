@@ -31,52 +31,52 @@ public class flashparty extends CommandTemplate {
     @Override
     public void execute(CommandSender sender, String label, String[] args) {
         if (!sender.hasPermission("flashparty.use")) {
-            sender.sendMessage(color(getLocaleManager().getString("not-permission")));
+            sender.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-permission")));
             return;
         }
 
         if (args.length == 0) {
-            sender.sendMessage(color("{prefix}&fСписок системных команд\n&7/fp reload - перезагрузить " +
+            sender.sendMessage(getMiniManager().deserialize("{prefix}&fСписок системных команд\n&7/fp reload - перезагрузить " +
                     "конфигурацию\n&7/fp remove [пати] - удалить пати"));
             return;
         }
 
         if (args[0].equalsIgnoreCase("reload")) {
             if (!sender.hasPermission("flashparty.reload")) {
-                sender.sendMessage(color(getLocaleManager().getString("not-permission")));
+                sender.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-permission")));
                 return;
             }
 
             getLocaleManager().reload();
             getInstance().reloadConfig();
-            sender.sendMessage(color(getLocaleManager().getString("reload")));
+            sender.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("reload")));
         } else if (args[0].equalsIgnoreCase("remove")) {
             if (!sender.hasPermission("flashparty.remove")) {
-                sender.sendMessage(color(getLocaleManager().getString("not-permission")));
+                sender.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-permission")));
                 return;
             }
 
             if (args.length < 2) {
-                sender.sendMessage(color("{prefix}Используйте: &#4dff4d/fp remove [пати]"));
+                sender.sendMessage(getMiniManager().deserialize("{prefix}Используйте: <gradient:#96FB57:#70FFC3>/fp remove [пати]"));
                 return;
             }
 
             String party_name = args[1];
             int clan_id = getClanId(party_name);
             if (clan_id == -1) {
-                sender.sendMessage(color(getLocaleManager().getString("not-found-party")));
+                sender.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-found-party")));
                 return;
             }
 
             List<Member> members = getDataBase().getMembers(clan_id);
             getDataBase().removeParty(clan_id);
-            sender.sendMessage(color(getLocaleManager().getString("remove")
+            sender.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("remove")
                     .replace("{party}", party_name)
             ));
             for (Member member: members) {
                 Player player = Bukkit.getPlayer(member.getUuid());
                 if (player != null) {
-                    player.sendMessage(color(getLocaleManager().getString("remove-notify")
+                    player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("remove-notify")
                             .replace("{party}", party_name)
                     ));
                 }

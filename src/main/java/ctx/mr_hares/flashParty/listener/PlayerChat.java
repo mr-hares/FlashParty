@@ -30,8 +30,9 @@ public class PlayerChat implements Listener {
             for (Member m: members) {
                 Player p = Bukkit.getPlayer(m.getUuid());
                 if (p != null) {
-                    p.sendMessage(color(getInstance().getConfig().getString("party-chat.format",
-                            "&7(&#4dff4dПати&7) &r{rank} {player} &#4dff4d- &r{message}")
+                    p.sendMessage(getMiniManager().deserialize(getInstance().getConfig().getString("party-chat.format",
+                            "&7(<gradient:#96FB57:#70FFC3>Пати</gradient>) &r{rank} {player} <gradient:#96FB57:#70FFC3>- " +
+                                    "&r{message}")
                             .replace("{rank}", member.getNameRank())
                             .replace("{player}", player.getName())
                             .replace("{message}", content)

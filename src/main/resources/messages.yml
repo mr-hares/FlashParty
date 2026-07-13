@@ -1,5 +1,5 @@
-prefix: "&7(&#4dff4dFlashParty&7) &r"
-not-permission: "{prefix}У вас &#4dff4dнедостаточно прав &fдля выполнения данной команды"
+prefix: "&7(<gradient:#96FB57:#70FFC3>FlashParty</gradient>) &r"
+not-permission: "{prefix}У вас <gradient:#96FB57:#70FFC3>недостаточно прав &fдля выполнения данной команды"
 
 # Help
 help:
@@ -17,94 +17,94 @@ help:
     - "&7/party rename [название] - переименовать название пати"
     - "&7/party kick [ник] - исключить игрока из пати"
     - "&7/party rank [ник] [ранг] - изменить ранг участника пати"
+    - ""
 
-  use-create: "{prefix}Используйте: &#4dff4d/party create [название]"
-  use-invite: "{prefix}Используйте: &#4dff4d/party invite [ник]"
-  use-tag: "{prefix}Используйте: &#4dff4d/party tag [цвет] [тег]"
-  use-rename: "{prefix}Используйте: &#4dff4d/party rename [название]"
-  use-kick: "{prefix}Используйте: &#4dff4d/party kick [ник]"
-  use-rank: "{prefix}Используйте: &#4dff4d/party rank [ник] [ранг]"
+  use-create: "{prefix}Используйте: <gradient:#96FB57:#70FFC3>/party create [название]"
+  use-invite: "{prefix}Используйте: <gradient:#96FB57:#70FFC3>/party invite [ник]"
+  use-tag: "{prefix}Используйте: <gradient:#96FB57:#70FFC3>/party tag [цвет] [тег]"
+  use-rename: "{prefix}Используйте: <gradient:#96FB57:#70FFC3>/party rename [название]"
+  use-kick: "{prefix}Используйте: <gradient:#96FB57:#70FFC3>/party kick [ник]"
+  use-rank: "{prefix}Используйте: <gradient:#96FB57:#70FFC3>/party rank [ник] [ранг]"
 
 # Main
-in-party: "{prefix}Вы &#4dff4dуже находитесь &fв какой-то пати"
-not-in-party: "{prefix}Вы &#4dff4dне находитесь &fв какой-либо пати"
-player-in-party: "{prefix}Игрок &#4dff4dуже находитесь &fв какой-то пати"
-player-not-in-party: "{prefix}Игрок &#4dff4dне находитесь &fв вашей пати"
+in-party: "{prefix}Вы <gradient:#96FB57:#70FFC3>уже находитесь &fв какой-то пати"
+not-in-party: "{prefix}Вы <gradient:#96FB57:#70FFC3>не находитесь &fв какой-либо пати"
+player-in-party: "{prefix}Игрок <gradient:#96FB57:#70FFC3>уже находитесь &fв какой-то пати"
+player-not-in-party: "{prefix}Игрок <gradient:#96FB57:#70FFC3>не находитесь &fв вашей пати"
 
-not-rank: "{prefix}Ваш ранг &#4dff4dне позволяет использовать &fданную функцию"
-not-found-player: "{prefix}Указанный вами игрок &#4dff4dне найден"
+not-rank: "{prefix}Ваш ранг <gradient:#96FB57:#70FFC3>не позволяет использовать &fданную функцию"
+not-found-player: "{prefix}Указанный вами игрок <gradient:#96FB57:#70FFC3>не найден"
 
-with-myself: "{prefix}Вы &#4dff4dне можете &fвзаимодействовать с самим собой"
+with-myself: "{prefix}Вы <gradient:#96FB57:#70FFC3>не можете &fвзаимодействовать с самим собой"
 
-max-party: "{prefix}На сервере &#4dff4dдостигнут &fлимит пати"
+max-party: "{prefix}На сервере <gradient:#96FB57:#70FFC3>достигнут &fлимит пати"
 max-players: "{prefix}Вы #4dff4dдостигли &fлимита участников в одном пати"
 
 # =================== PARTY COMMAND ===================
 
 # /party create
-name-is-long: "{prefix}Название пати &#4dff4dне должно быть &fбольше &#4dff4d{max_length} &fсимволов"
-name-is-short: "{prefix}Название пати &#4dff4dдолжно быть &fбольше &#4dff4d{min_length} &fсимволов"
-name-is-occupied: "{prefix}Данное название пати &#4dff4dуже занято &fкем-то"
+name-is-long: "{prefix}Название пати <gradient:#96FB57:#70FFC3>не должно быть &fбольше <gradient:#96FB57:#70FFC3>{max_length} &fсимволов"
+name-is-short: "{prefix}Название пати <gradient:#96FB57:#70FFC3>должно быть &fбольше <gradient:#96FB57:#70FFC3>{min_length} &fсимволов"
+name-is-occupied: "{prefix}Данное название пати <gradient:#96FB57:#70FFC3>уже занято &fкем-то"
 
-party-create: "{prefix}Вы &#4dff4dуспешно создали &fновое пати {name}"
+party-create: "{prefix}Вы <gradient:#96FB57:#70FFC3>успешно создали &fновое пати {name}"
 
 # /party invite
 is-invite: "{prefix}У данное игрока уже есть активное предложение"
-invited: "{prefix}Вы &#4dff4dотправили &fприглашение на вступление в пати игроку &#4dff4d{player}"
-invite-notify: "{prefix}Игрок &#4dff4d{player} &fприглашает вас &#4dff4dвступить &fв пати {party}\n<on_click:/party 
-accept>[ принять &f]</on_click> <on_click:/party deny>[ отклонить ]</on_click>"
+invited: "{prefix}Вы <gradient:#96FB57:#70FFC3>отправили &fприглашение на вступление в пати игроку <gradient:#96FB57:#70FFC3>{player}"
+invite-notify: "{prefix}Игрок <gradient:#96FB57:#70FFC3>{player} &fприглашает вас <gradient:#96FB57:#70FFC3>вступить &fв пати {party}\n<click:run_command:/party accept><hover:show_text:Принять предложение>[ принять ]</hover></click> <click:run_command:/party deny><hover:show_text:Отклонить предложение>[ отклонить ]</hover></click>"
 
 # /party accept/deny
-not-offers: "{prefix}У вас &#4dff4dнет активных &fпредложений"
-accept: "{prefix}Вы &#4dff4dприняли &fпредложение на вступление в пати"
-accept-notify: "{prefix}Игрок &#4dff4d{player} &fпринял ваше предложение"
-deny: "{prefix}Вы &#4dff4dотклонили &fпредложение на вступление в пати"
-deny-notify: "{prefix}Игрок &#4dff4d{player} &fотклонил ваше предложение"
+not-offers: "{prefix}У вас <gradient:#96FB57:#70FFC3>нет активных &fпредложений"
+accept: "{prefix}Вы <gradient:#96FB57:#70FFC3>приняли &fпредложение на вступление в пати"
+accept-notify: "{prefix}Игрок <gradient:#96FB57:#70FFC3>{player} &fпринял ваше предложение"
+deny: "{prefix}Вы <gradient:#96FB57:#70FFC3>отклонили &fпредложение на вступление в пати"
+deny-notify: "{prefix}Игрок <gradient:#96FB57:#70FFC3>{player} &fотклонил ваше предложение"
 
 # /party leave
-leave: "{prefix}Вы &#4dff4dпокинули &fпати по собственному желанию"
-leave-owner: "{prefix}Создатель пати &#4dff4dпокинул &fеё по собственному желанию. Пати &#4dff4dудалено"
+leave: "{prefix}Вы <gradient:#96FB57:#70FFC3>покинули &fпати по собственному желанию"
+leave-owner: "{prefix}Создатель пати <gradient:#96FB57:#70FFC3>покинул &fеё по собственному желанию. Пати <gradient:#96FB57:#70FFC3>удалено"
 
 # /party rename
-rename: "{prefix}Вы &#4dff4dизменили &fназвание своего пати"
+rename: "{prefix}Вы <gradient:#96FB57:#70FFC3>изменили &fназвание своего пати"
 
 # /party tag
-tag-is-long: "{prefix}ТЕГ пати &#4dff4dне должно быть &fбольше &#4dff4d{max_length} &fсимволов"
-tag-is-short: "{prefix}ТЕГ пати &#4dff4dдолжно быть &fбольше &#4dff4d{min_length} &fсимволов"
-tag-add: "{prefix}Вы &#4dff4dдобавили &fТЕГ пати"
-tag-remove: "{prefix}Вы &#4dff4dудалили &fТЕГ пати"
+tag-is-long: "{prefix}ТЕГ пати <gradient:#96FB57:#70FFC3>не должно быть &fбольше <gradient:#96FB57:#70FFC3>{max_length} &fсимволов"
+tag-is-short: "{prefix}ТЕГ пати <gradient:#96FB57:#70FFC3>должно быть &fбольше <gradient:#96FB57:#70FFC3>{min_length} &fсимволов"
+tag-add: "{prefix}Вы <gradient:#96FB57:#70FFC3>добавили &fТЕГ пати"
+tag-remove: "{prefix}Вы <gradient:#96FB57:#70FFC3>удалили &fТЕГ пати"
 
 # /party kick
-kick-player: "{prefix}Вы &#4dff4dисключили &fиз пати игрока &#4dff4d{player}"
-kick-notify: "{prefix}Вас &#4dff4dисключили &fиз пати {party}"
+kick-player: "{prefix}Вы <gradient:#96FB57:#70FFC3>исключили &fиз пати игрока <gradient:#96FB57:#70FFC3>{player}"
+kick-notify: "{prefix}Вас <gradient:#96FB57:#70FFC3>исключили &fиз пати {party}"
 
 # /party list
 list-empty: "{prefix}Список активных пати пуст"
 list-header: "{prefix}Список активных пати"
-list-item: "&#4dff4d- &r{name} &#4dff4d(Участников: {members}) &#4dff4d| &rТЕГ: {tag}"
+list-item: "<gradient:#96FB57:#70FFC3>- &r{name} <gradient:#96FB57:#70FFC3>(Участников: {members}) <gradient:#96FB57:#70FFC3>| &rТЕГ: {tag}"
 
 # /party rank
-not-found-rank: "{prefix}Указанный вами ранг &#4dff4dне найден"
+not-found-rank: "{prefix}Указанный вами ранг <gradient:#96FB57:#70FFC3>не найден"
 already-have-rank: "{prefix}Участник уже находится на данном ранге"
-edit-rank: "{prefix}Вы &#4dff4dизменили &fранг &#4dff4d{player} &fна &#4dff4d{rank}"
-edit-rank-notify: "{prefix}Вам ранг &#4dff4dбыл изменён &fна &#4dff4d{rank}"
+edit-rank: "{prefix}Вы <gradient:#96FB57:#70FFC3>изменили &fранг <gradient:#96FB57:#70FFC3>{player} &fна <gradient:#96FB57:#70FFC3>{rank}"
+edit-rank-notify: "{prefix}Вам ранг <gradient:#96FB57:#70FFC3>был изменён &fна <gradient:#96FB57:#70FFC3>{rank}"
 
 # /party info
 party-info:
   - ""
-  - "&#4dff4d---- &fИнформация о партии {party} &#4dff4d----"
-  - "&fОснователь: &#4dff4d{owner}"
-  - "&fЗаместители: &#4dff4d{deputies}"
+  - "<gradient:#96FB57:#70FFC3>---- &fИнформация о партии {party} <gradient:#96FB57:#70FFC3>----"
+  - "&fОснователь: <gradient:#96FB57:#70FFC3>{owner}"
+  - "&fЗаместители: <gradient:#96FB57:#70FFC3>{deputies}"
   - "&fТЭГ: {tag}"
-  - "&fУчастники: &#4dff4d{members}"
+  - "&fУчастники: <gradient:#96FB57:#70FFC3>{members}"
   - ""
 
 # =================== FP COMMAND ===================
 
 # /fp reload
-reload: "{prefix}Конфигурация плагина &#4dff4dперезагружена"
+reload: "{prefix}Конфигурация плагина <gradient:#96FB57:#70FFC3>перезагружена"
 
 # /fp remove
-not-found-party: "{prefix}Указанное пати &#4dff4dне найдено"
-remove: "{prefix}Вы &#4dff4dудалили &fпати {party}"
-remove-notify: "{prefix}Пати {party} было &#4dff4dудалено &fадминистрацией сервера"
+not-found-party: "{prefix}Указанное пати <gradient:#96FB57:#70FFC3>не найдено"
+remove: "{prefix}Вы <gradient:#96FB57:#70FFC3>удалили &fпати {party}"
+remove-notify: "{prefix}Пати {party} было <gradient:#96FB57:#70FFC3>удалено &fадминистрацией сервера"

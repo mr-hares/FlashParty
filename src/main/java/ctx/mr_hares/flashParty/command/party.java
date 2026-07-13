@@ -59,14 +59,14 @@ public class party extends CommandTemplate {
     @Override
     public void execute(CommandSender sender, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(color("{prefix}&fДанная команда доступна &#4dff4dтолько &fдля игрока"));
+            sender.sendMessage(getMiniManager().deserialize("{prefix}&fДанная команда доступна <gradient:#96FB57:#70FFC3>только &fдля игрока"));
             return;
         }
 
         Player player = (Player) sender;
 
         if (args.length == 0) {
-            player.sendMessage(color(String.join("\n",
+            player.sendMessage(getMiniManager().deserialize(String.join("\n",
                     getLocaleManager().getYAML().getStringList("help.command-list"))));
             return;
         }
@@ -76,17 +76,17 @@ public class party extends CommandTemplate {
         if (args[0].equalsIgnoreCase("create")) {
             if (getInstance().getConfig().getInt("max-party", 7) > -1 &&
                     getDataBase().getParties().size() >= getInstance().getConfig().getInt("max-party", 7)) {
-                player.sendMessage(color(getLocaleManager().getString("max-party")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("max-party")));
                 return;
             }
 
             if (member != null) {
-                player.sendMessage(color(getLocaleManager().getString("in-party")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("in-party")));
                 return;
             }
 
             if (args.length < 2) {
-                player.sendMessage(color(getLocaleManager().getString("help.use-create")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("help.use-create")));
                 return;
             }
 
@@ -95,85 +95,85 @@ public class party extends CommandTemplate {
             int min_length = getInstance().getConfig().getInt("party-name.min-length");
 
             if (party_name.length() > max_length) {
-                player.sendMessage(color(getLocaleManager().getString("name-is-long").replace("{max_length}",
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("name-is-long").replace("{max_length}",
                         String.valueOf(max_length))));
                 return;
             }
 
             if (party_name.length() < min_length) {
-                player.sendMessage(color(getLocaleManager().getString("name-is-short").replace("{min_length}",
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("name-is-short").replace("{min_length}",
                         String.valueOf(min_length))));
                 return;
             }
 
             if (isOccupied(party_name)) {
-                player.sendMessage(color(getLocaleManager().getString("name-is-occupied")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("name-is-occupied")));
                 return;
             }
 
             getDataBase().createParty(player.getUniqueId(), party_name);
-            player.sendMessage(color(getLocaleManager().getString("party-create")
+            player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("party-create")
                     .replace("{name}", party_name)
             ));
         } else if (args[0].equalsIgnoreCase("invite")) {
             if (member == null) {
-                player.sendMessage(color(getLocaleManager().getString("not-in-party")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-in-party")));
                 return;
             }
 
             if (member.getRank() < 2) {
-                player.sendMessage(color(getLocaleManager().getString("not-rank")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-rank")));
                 return;
             }
 
             if (getInstance().getConfig().getInt(
                     "max-player-in-party", 10) > -1 && getDataBase().getMembers(member.getParty().getClan_id()).size() >= getInstance().getConfig().getInt(
                     "max-player-in-party", 10)) {
-                player.sendMessage(color(getLocaleManager().getString("max-players")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("max-players")));
                 return;
             }
 
             if (args.length < 2) {
-                player.sendMessage(color(getLocaleManager().getString("help.use-invite")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("help.use-invite")));
                 return;
             }
 
             Player target = Bukkit.getPlayer(args[1]);
             if (target == null) {
-                player.sendMessage(color(getLocaleManager().getString("not-found-player")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-found-player")));
                 return;
             }
 
             if (target == player) {
-                player.sendMessage(color(getLocaleManager().getString("with-myself")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("with-myself")));
                 return;
             }
 
             Member tar_member = getDataBase().getMember(target.getUniqueId());
             if (tar_member != null) {
-                player.sendMessage(color(getLocaleManager().getString("player-in-party")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("player-in-party")));
                 return;
             }
 
             if (invite_request.asMap().containsKey(target.getUniqueId())) {
-                player.sendMessage(color(getLocaleManager().getString("is-invite")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("is-invite")));
                 return;
             }
 
             invite_request.put(target.getUniqueId(), player.getUniqueId());
-            player.sendMessage(color(getLocaleManager().getString("invited").replace("{player}", target.getName())));
-            target.spigot().sendMessage(parseBBClickable(getLocaleManager().getString("invite-notify")
+            player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("invited").replace("{player}", target.getName())));
+            target.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("invite-notify")
                     .replace("{player}", player.getName())
                     .replace("{party}", member.getParty().getName())
             ));
         } else if (args[0].equalsIgnoreCase("accept")) {
             if (member != null) {
-                player.sendMessage(color(getLocaleManager().getString("in-party")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("in-party")));
                 return;
             }
 
             if (!invite_request.asMap().containsKey(player.getUniqueId())) {
-                player.sendMessage(color(getLocaleManager().getString("not-offers")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-offers")));
                 return;
             }
 
@@ -182,14 +182,14 @@ public class party extends CommandTemplate {
 
             invite_request.asMap().remove(player.getUniqueId());
             getDataBase().addMember(target_member.getParty().getClan_id(), player.getUniqueId(), 1);
-            player.sendMessage(color(getLocaleManager().getString("accept")));
+            player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("accept")));
             Player tar = Bukkit.getPlayer(target_member.getUuid());
             if (tar != null) {
-                tar.sendMessage(color(getLocaleManager().getString("accept-notify").replace("{player}", player.getName())));
+                tar.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("accept-notify").replace("{player}", player.getName())));
             }
         } else if (args[0].equalsIgnoreCase("deny")) {
             if (!invite_request.asMap().containsKey(player.getUniqueId())) {
-                player.sendMessage(color(getLocaleManager().getString("not-offers")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-offers")));
                 return;
             }
 
@@ -197,47 +197,47 @@ public class party extends CommandTemplate {
             if (target_member == null) return;
 
             invite_request.asMap().remove(player.getUniqueId());
-            player.sendMessage(color(getLocaleManager().getString("deny")));
+            player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("deny")));
             Player tar = Bukkit.getPlayer(target_member.getUuid());
             if (tar != null) {
-                tar.sendMessage(color(getLocaleManager().getString("deny-notify").replace("{player}",
+                tar.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("deny-notify").replace("{player}",
                         player.getName())));
             }
         } else if (args[0].equalsIgnoreCase("leave")) {
             if (member == null) {
-                player.sendMessage(color(getLocaleManager().getString("not-in-party")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-in-party")));
                 return;
             }
 
             if (member.getRank() == 3) {
                 getDataBase().removeParty(member.getParty().getClan_id());
-                player.sendMessage(color(getLocaleManager().getString("leave-owner")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("leave-owner")));
                 return;
             }
 
             getDataBase().removeMember(member.getParty().getClan_id(), member.getUuid());
-            player.sendMessage(color(getLocaleManager().getString("leave")));
+            player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("leave")));
         } else if (args[0].equalsIgnoreCase("tag")) {
             if (member == null) {
-                player.sendMessage(color(getLocaleManager().getString("not-in-party")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-in-party")));
                 return;
             }
 
             if (member.getRank() < 3) {
-                player.sendMessage(color(getLocaleManager().getString("not-rank")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-rank")));
                 return;
             }
             
             if (args.length >= 2) {
                 if (args[1].equalsIgnoreCase("remove")) {
                     getDataBase().editTagParty(member.getParty().getClan_id(), "not");
-                    player.sendMessage(color(getLocaleManager().getString("tag-remove")));
+                    player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("tag-remove")));
                     return;
                 }
             }
 
             if (args.length < 3) {
-                player.sendMessage(color(getLocaleManager().getString("help.use-tag")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("help.use-tag")));
                 return;
             }
 
@@ -247,141 +247,141 @@ public class party extends CommandTemplate {
             String tag = args[2];
 
             if (tag.length() > max_length) {
-                player.sendMessage(color(getLocaleManager().getString("tag-is-long").replace("{max_length}",
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("tag-is-long").replace("{max_length}",
                         String.valueOf(max_length))));
                 return;
             }
 
             if (tag.length() < min_length) {
-                player.sendMessage(color(getLocaleManager().getString("tag-is-short").replace("{min_length}",
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("tag-is-short").replace("{min_length}",
                         String.valueOf(min_length))));
                 return;
             }
 
             getDataBase().editTagParty(member.getParty().getClan_id(), color + tag);
-            player.sendMessage(color(getLocaleManager().getString("tag-add")));
+            player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("tag-add")));
         } else if (args[0].equalsIgnoreCase("rename")) {
             if (member == null) {
-                player.sendMessage(color(getLocaleManager().getString("not-in-party")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-in-party")));
                 return;
             }
 
             if (member.getRank() < 3) {
-                player.sendMessage(color(getLocaleManager().getString("not-rank")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-rank")));
                 return;
             }
 
             if (args.length < 2) {
-                player.sendMessage(color(getLocaleManager().getString("help.use-rename")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("help.use-rename")));
                 return;
             }
 
             if (isOccupied(args[1])) {
-                player.sendMessage(color(getLocaleManager().getString("name-is-occupied")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("name-is-occupied")));
                 return;
             }
 
             getDataBase().editNameParty(member.getParty().getClan_id(), args[1]);
-            player.sendMessage(color(getLocaleManager().getString("rename")));
+            player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("rename")));
         } else if (args[0].equalsIgnoreCase("kick")) {
             if (member == null) {
-                player.sendMessage(color(getLocaleManager().getString("not-in-party")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-in-party")));
                 return;
             }
 
             if (member.getRank() < 2) {
-                player.sendMessage(color(getLocaleManager().getString("not-rank")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-rank")));
                 return;
             }
 
             if (args.length < 2) {
-                player.sendMessage(color(getLocaleManager().getString("help.use-kick")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("help.use-kick")));
                 return;
             }
 
             OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
             if (!target.hasPlayedBefore()) {
-                player.sendMessage(color(getLocaleManager().getString("not-found-player")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-found-player")));
                 return;
             }
 
             if (target.getUniqueId() == player.getUniqueId()) {
-                player.sendMessage(color(getLocaleManager().getString("with-myself")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("with-myself")));
                 return;
             }
 
             Member tar_member = getDataBase().getMember(target.getUniqueId());
             if (tar_member == null || tar_member.getParty().getClan_id() != member.getParty().getClan_id()) {
-                player.sendMessage(color(getLocaleManager().getString("player-not-in-party")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("player-not-in-party")));
                 return;
             }
 
             getDataBase().removeMember(member.getParty().getClan_id(), target.getUniqueId());
-            player.sendMessage(color(getLocaleManager().getString("kick-player")
+            player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("kick-player")
                     .replace("{player}", target.getName())
             ));
             if (target.isOnline()) {
-                target.getPlayer().sendMessage(color(getLocaleManager().getString("kick-notify")
+                target.getPlayer().sendMessage(getMiniManager().deserialize(getLocaleManager().getString("kick-notify")
                         .replace("{party}", member.getParty().getName())
                 ));
             }
         } else if (args[0].equalsIgnoreCase("rank")) {
             if (member == null) {
-                player.sendMessage(color(getLocaleManager().getString("not-in-party")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-in-party")));
                 return;
             }
 
             if (member.getRank() < 3) {
-                player.sendMessage(color(getLocaleManager().getString("not-rank")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-rank")));
                 return;
             }
 
             if (args.length < 3) {
-                player.sendMessage(color(getLocaleManager().getString("help.use-rank")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("help.use-rank")));
                 return;
             }
 
             OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
             if (!target.hasPlayedBefore()) {
-                player.sendMessage(color(getLocaleManager().getString("not-found-player")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-found-player")));
                 return;
             }
 
             if (target.getUniqueId() == player.getUniqueId()) {
-                player.sendMessage(color(getLocaleManager().getString("with-myself")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("with-myself")));
                 return;
             }
 
             Member tar_member = getDataBase().getMember(target.getUniqueId());
             if (tar_member == null || tar_member.getParty().getClan_id() != member.getParty().getClan_id()) {
-                player.sendMessage(color(getLocaleManager().getString("player-not-in-party")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("player-not-in-party")));
                 return;
             }
 
             String rank = args[2];
             if (getRank(rank) == -1) {
-                player.sendMessage(color(getLocaleManager().getString("not-found-rank")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-found-rank")));
                 return;
             }
 
             if (tar_member.getRank() == getRank(rank)) {
-                player.sendMessage(color(getLocaleManager().getString("already-have-rank")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("already-have-rank")));
                 return;
             }
 
             getDataBase().editRank(target.getUniqueId(), getRank(rank));
-            player.sendMessage(color(getLocaleManager().getString("edit-rank")
+            player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("edit-rank")
                     .replace("{player}", target.getName())
                     .replace("{rank}", rank)
             ));
             if (target.isOnline()) {
-                target.getPlayer().sendMessage(color(getLocaleManager().getString("edit-notify")
+                target.getPlayer().sendMessage(getMiniManager().deserialize(getLocaleManager().getString("edit-notify")
                         .replace("{rank}", rank)
                 ));
             }
         } else if (args[0].equalsIgnoreCase("info")) {
             if (member == null) {
-                player.sendMessage(color(getLocaleManager().getString("not-in-party")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("not-in-party")));
                 return;
             }
 
@@ -394,7 +394,7 @@ public class party extends CommandTemplate {
 
             List<String> message = getLocaleManager().getYAML().getStringList("party-info");
 
-            player.sendMessage(color(String.join("\n", message)
+            player.sendMessage(getMiniManager().deserialize(String.join("\n", message)
                     .replace("{owner}", getOwner(members))
                     .replace("{deputies}", deputies.isEmpty() ? "пусто" : String.join(", ", deputies))
                     .replace("{tag}", party.getTag())
@@ -403,21 +403,21 @@ public class party extends CommandTemplate {
         } else if (args[0].equalsIgnoreCase("list")) {
             List<Party> parties = getDataBase().getParties();
             if (parties.isEmpty()) {
-                player.sendMessage(color(getLocaleManager().getString("list-empty")));
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("list-empty")));
                 return;
             }
 
-            player.sendMessage(color(getLocaleManager().getString("list-header")));
+            player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("list-header")));
 
             for (Party party: parties) {
-                player.sendMessage(color(getLocaleManager().getString("list-item")
+                player.sendMessage(getMiniManager().deserialize(getLocaleManager().getString("list-item")
                         .replace("{name}", party.getName())
                         .replace("{members}", String.valueOf(getDataBase().getMembers(party.getClan_id()).size()))
                         .replace("{tag}", party.getTag() == "not" ? "отсутствует" : party.getTag())
                 ));
             }
         } else {
-            player.sendMessage(color(String.join("\n",
+            player.sendMessage(getMiniManager().deserialize(String.join("\n",
                     getLocaleManager().getYAML().getStringList("help.command-list"))));
             return;
         }

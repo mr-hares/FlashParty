@@ -60,11 +60,15 @@ public class PartyPlaceholder extends PlaceholderExpansion {
                 return Objects.equals(member.getParty().getTag(), "отсутствует") ? "" :
                         " " + member.getParty().getTag();
             }
+
+            return "";
         } else if (params.equalsIgnoreCase("name")) {
             Member member = getDataBase().getMember(player.getUniqueId());
             if (member != null) {
                 return member.getParty().getName();
             }
+
+            return "";
         }
 
         return null;
